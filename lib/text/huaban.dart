@@ -392,9 +392,9 @@ class _SampleAppPageState extends State<SampleAppPage> {
         appBar: AppBar(
           title: Text("Sample App"),
         ),
-        onPressed: (){
-          print("object");
-        },
+        // onPressed: (){
+        //   print("object");
+        // },
         body: 
         // getBody(),
         // 滚动条
