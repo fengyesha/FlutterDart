@@ -6,7 +6,7 @@ main(List<String> args) {
   //reduce函数实现累加，reduce函数中接收的(prev, curr) => prev + curr就是一个闭包
   print(numbers.reduce((prev, curr) => prev + curr));
 }
-
+// 封装一个函数
 typedef Calculate = int Function(int num1, int num2);
 // 封装一个函数，要求：传入一个函数
 // test(int foo(int num1,int num2)){

@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'BDTest/BDWebView.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -22,32 +23,9 @@ class HYHomePage extends StatelessWidget {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
-        title: Text("data"),
+        title: Text("蓝鹿测试"),
       ),
-      body: HYHomeBody(),
-    );
-  }
-}
-
-/**
- * widget :
- * 有状态的widget：在运行过程中有一些状态（data）需要改变
- * 无状态的widget：StatelessWidget 内容是确定没有状态（data）的改变
- */
-/**
- * @required flutter中某一些的命名属性，通过这个注解标注这个属性是必传的
- * @immutable 这个注解标注了，就说明这个类中的所有属性必须是不可变的
- */
-class HYHomeBody extends StatelessWidget {
-  // 在这个地方写var是错误的
-  // var flag = true;
-  @override
-  Widget build(BuildContext context) {
-    return Center(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [HYContentBody(), Text("同意协议")],
-      ),
+      body: HYContentBody(),
     );
   }
 }
@@ -55,24 +33,82 @@ class HYHomeBody extends StatelessWidget {
 // flag:状态
 // StatelessWidget不能定义状态-》创建一个单独的类，这个类负责维护状态
 class HYContentBody extends StatefulWidget {
+  var stateBody = HYContentBodyState();
   @override
   State<StatefulWidget> createState() {
-    // TODO: implement createState
-    return HYContentBodyState();
+    return stateBody;
   }
 }
 
 class HYContentBodyState extends State<HYContentBody> {
-  var flag = true;
+  var text = "";
   @override
   Widget build(BuildContext context) {
-    return Checkbox(
-        value: flag,
-        onChanged: (value) {
-          setState(() {
-            this.flag = value;
-            print(flag);
-          });
-        });
+    return GestureDetector(
+      behavior: HitTestBehavior.translucent,
+      onTap: () {
+        FocusScope.of(context).requestFocus(FocusNode());
+      },
+      child: new Stack(children: [
+        Positioned(
+          child: Container(
+            child: TextField(
+              decoration: InputDecoration(
+                  hintText: "请输入网址",
+                  border: OutlineInputBorder(),
+                  hoverColor: Colors.red,
+                  hintStyle: TextStyle(
+                    color: Color.fromARGB(255, 85, 67, 68),
+                  )),
+              onChanged: (text) {
+                this.text = text;
+              },
+              onEditingComplete: () {
+                //输入完成时，配合TextInputAction.done使用
+                print("输入完成时");
+              },
+              onSubmitted: (text) {
+                //提交时,配合TextInputAction
+                print("onSubmitted" + text);
+              },
+            ),
+          ),
+          left: 0.0,
+          right: 0.0,
+          top: 0.0,
+          height: 60.0,
+        ),
+        Positioned(
+            left: 0,
+            right: 0.0,
+            top: 80.0,
+            height: 40.0,
+            child: Center(
+              child: RaisedButton(
+                  onPressed: () {
+                    FocusScope.of(context).requestFocus(FocusNode());
+                    if (isURL(this.text)) {
+                      print(this.text);
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (contex) =>
+                                  ProductDetail(url: this.text)));
+                    } else {
+                      print("不是网址");
+                    }
+                  },
+                  color: Colors.lightBlue,
+                  textTheme: ButtonTextTheme.primary,
+                  child: Text("跳转",
+                      style: TextStyle(color: Colors.white, fontSize: 20.0))),
+            )),
+      ]),
+    );
   }
+}
+
+bool isURL(String input) {
+  RegExp mobile = new RegExp(r"[a-zA-z]+://.*$");
+  return mobile.hasMatch(input);
 }
