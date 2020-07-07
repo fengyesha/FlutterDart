@@ -5,18 +5,19 @@ class WebViewPage extends StatefulWidget {
   final String url;
   WebViewPage({Key key, @required this.url}) : super(key: key);
   @override
-  _WebViewPageState createState() => _WebViewPageState.withURL(url: url);
+  _WebViewPageState createState() => _WebViewPageState.withURL(url: url,title: url);
 }
 
 class _WebViewPageState extends State<WebViewPage> {
   WebViewController _controller;
   var url;
+  var title;
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
         child: Scaffold(
           appBar: AppBar(
-            title: Text(url),
+            title: Text(title),
             actions: <Widget>[
               IconButton(
                 onPressed: () {
@@ -36,7 +37,7 @@ class _WebViewPageState extends State<WebViewPage> {
               },
               navigationDelegate: (NavigationRequest request) {
                 setState(() {
-                  this.url = request.url;
+                  this.title = request.url;
                 });
               if(request.url.startsWith("myapp://")) {
                 print("即将打开 ${request.url}");
@@ -62,7 +63,7 @@ class _WebViewPageState extends State<WebViewPage> {
         });
   }
 
-  _WebViewPageState.withURL({@required this.url});
+  _WebViewPageState.withURL({@required this.url,String title}):this.title = title ?? url;
 }
 
 class ProductDetail extends StatelessWidget {
