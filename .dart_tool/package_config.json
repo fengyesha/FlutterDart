@@ -2,6 +2,18 @@
   "configVersion": 2,
   "packages": [
     {
+      "name": "archive",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/archive-2.0.13",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
+      "name": "args",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/args-1.6.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.3"
+    },
+    {
       "name": "async",
       "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/async-2.4.1",
       "packageUri": "lib/",
@@ -20,16 +32,22 @@
       "languageVersion": "2.0"
     },
     {
-      "name": "clock",
-      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/clock-1.0.1",
-      "packageUri": "lib/",
-      "languageVersion": "2.0"
-    },
-    {
       "name": "collection",
       "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/collection-1.14.12",
       "packageUri": "lib/",
       "languageVersion": "2.0"
+    },
+    {
+      "name": "convert",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/convert-2.1.1",
+      "packageUri": "lib/",
+      "languageVersion": "1.17"
+    },
+    {
+      "name": "crypto",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/crypto-2.1.4",
+      "packageUri": "lib/",
+      "languageVersion": "2.1"
     },
     {
       "name": "cupertino_icons",
@@ -42,12 +60,6 @@
       "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/english_words-3.1.5",
       "packageUri": "lib/",
       "languageVersion": "1.22"
-    },
-    {
-      "name": "fake_async",
-      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/fake_async-1.1.0",
-      "packageUri": "lib/",
-      "languageVersion": "2.2"
     },
     {
       "name": "flutter",
@@ -74,6 +86,12 @@
       "languageVersion": "2.3"
     },
     {
+      "name": "image",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/image-2.1.12",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
+    },
+    {
       "name": "matcher",
       "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/matcher-0.12.6",
       "packageUri": "lib/",
@@ -87,7 +105,7 @@
     },
     {
       "name": "path",
-      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/path-1.7.0",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/path-1.6.4",
       "packageUri": "lib/",
       "languageVersion": "2.0"
     },
@@ -96,6 +114,18 @@
       "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/pedantic-1.9.0",
       "packageUri": "lib/",
       "languageVersion": "2.1"
+    },
+    {
+      "name": "petitparser",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/petitparser-2.4.0",
+      "packageUri": "lib/",
+      "languageVersion": "2.4"
+    },
+    {
+      "name": "quiver",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/quiver-2.1.3",
+      "packageUri": "lib/",
+      "languageVersion": "2.0"
     },
     {
       "name": "sky_engine",
@@ -158,13 +188,19 @@
       "languageVersion": "2.7"
     },
     {
+      "name": "xml",
+      "rootUri": "file:///Applications/flutter/.pub-cache/hosted/pub.flutter-io.cn/xml-3.6.1",
+      "packageUri": "lib/",
+      "languageVersion": "2.6"
+    },
+    {
       "name": "flutterHelloWorld",
       "rootUri": "../",
       "packageUri": "lib/",
       "languageVersion": "2.7"
     }
   ],
-  "generated": "2020-07-07T11:29:45.912714Z",
+  "generated": "2020-07-07T14:16:52.810537Z",
   "generator": "pub",
-  "generatorVersion": "2.9.0-5.0.dev.flutter-9c94f08410"
+  "generatorVersion": "2.8.4"
 }

@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'BDTest/BDWebView.dart';
+import 'package:flutter/services.dart';
 
 void main(List<String> args) {
   runApp(MyApp());
@@ -33,7 +34,7 @@ class HYHomePage extends StatelessWidget {
 // flag:状态
 // StatelessWidget不能定义状态-》创建一个单独的类，这个类负责维护状态
 class HYContentBody extends StatefulWidget {
-  var stateBody = HYContentBodyState();
+  final stateBody = HYContentBodyState();
   @override
   State<StatefulWidget> createState() {
     return stateBody;
@@ -41,7 +42,16 @@ class HYContentBody extends StatefulWidget {
 }
 
 class HYContentBodyState extends State<HYContentBody> {
-  var text = "";
+  var textUrl = new TextEditingController();
+  @override
+  void initState() {
+    super.initState();
+    Clipboard.getData(Clipboard.kTextPlain).then((value) => () {
+          print(value.text);
+          this.textUrl.text = value.text;
+        });
+  }
+
   @override
   Widget build(BuildContext context) {
     return GestureDetector(
@@ -61,8 +71,9 @@ class HYContentBodyState extends State<HYContentBody> {
                     color: Color.fromARGB(255, 85, 67, 68),
                   )),
               onChanged: (text) {
-                this.text = text;
+                this.textUrl.text = text;
               },
+              controller: this.textUrl,
               onEditingComplete: () {
                 //输入完成时，配合TextInputAction.done使用
                 print("输入完成时");
@@ -87,13 +98,13 @@ class HYContentBodyState extends State<HYContentBody> {
               child: RaisedButton(
                   onPressed: () {
                     FocusScope.of(context).requestFocus(FocusNode());
-                    if (isURL(this.text)) {
-                      print(this.text);
+                    if (isURL(this.textUrl.text)) {
+                      print(this.textUrl.text);
                       Navigator.push(
                           context,
                           MaterialPageRoute(
                               builder: (contex) =>
-                                  ProductDetail(url: this.text)));
+                                  WebViewPage(url: this.textUrl.text)));
                     } else {
                       print("不是网址");
                     }
