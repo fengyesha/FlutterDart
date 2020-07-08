@@ -5,13 +5,16 @@ class WebViewPage extends StatefulWidget {
   final String url;
   WebViewPage({Key key, @required this.url}) : super(key: key);
   @override
-  _WebViewPageState createState() => _WebViewPageState.withURL(url: url,title: url);
+  _WebViewPageState createState() =>
+      _WebViewPageState.withURL(url: url, title: url);
 }
 
 class _WebViewPageState extends State<WebViewPage> {
   WebViewController _controller;
   var url;
   var title;
+  var lineProgress;
+  bool isLoading = true; // 设置状态
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
@@ -27,27 +30,46 @@ class _WebViewPageState extends State<WebViewPage> {
                 icon: Icon(Icons.refresh),
               ),
             ],
+            bottom: PreferredSize(
+                child: _progressBar(lineProgress, context),
+                preferredSize: Size.fromHeight(2.0)),
           ),
           body: Center(
-            child: WebView(
-              javascriptMode: JavascriptMode.unrestricted,
-              initialUrl: url,
-              onWebViewCreated: (controller) {
-                _controller = controller;
-              },
-              navigationDelegate: (NavigationRequest request) {
-                setState(() {
-                  this.title = request.url;
-                });
-              if(request.url.startsWith("myapp://")) {
-                print("即将打开 ${request.url}");
-                return NavigationDecision.prevent;
-              }
-              else{
-                print("即将打开 ${request.url}");
-                return NavigationDecision.navigate;
-              }
-            } ,
+            child: Stack(
+              children: [
+                WebView(
+                  javascriptMode: JavascriptMode.unrestricted,
+                  initialUrl: url,
+                  onWebViewCreated: (controller) {
+                    _controller = controller;
+                  },
+                  onPageFinished: (String url) {
+                    setState(() {
+                      isLoading = false; // 页面加载完成，更新状态
+                    });
+                  },
+                  navigationDelegate: (NavigationRequest request) {
+                    setState(() {
+                      this.title = request.url;
+                      isLoading = true; // 开始访问页面，更新状态
+                    });
+                    if (request.url.startsWith("myapp://")) {
+                      print("即将打开 ${request.url}");
+                      return NavigationDecision.prevent;
+                    } else {
+                      print("即将打开 ${request.url}");
+                      return NavigationDecision.navigate;
+                    }
+                  },
+                ),
+                isLoading
+                    ? Container(
+                        child: Center(
+                          child: CircularProgressIndicator(),
+                        ),
+                      )
+                    : Container(),
+              ],
             ),
           ),
         ),
@@ -63,7 +85,16 @@ class _WebViewPageState extends State<WebViewPage> {
         });
   }
 
-  _WebViewPageState.withURL({@required this.url,String title}):this.title = title ?? url;
+  _WebViewPageState.withURL({@required this.url, String title})
+      : this.title = title ?? url;
+}
+
+_progressBar(double progress, BuildContext context) {
+  return LinearProgressIndicator(
+    backgroundColor: Colors.white70.withOpacity(0),
+    value: progress == 1.0 ? 0 : progress,
+    valueColor: new AlwaysStoppedAnimation<Color>(Colors.blue),
+  );
 }
 
 class ProductDetail extends StatelessWidget {
