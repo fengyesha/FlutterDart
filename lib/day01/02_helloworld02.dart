@@ -29,7 +29,7 @@ class HYHomePage extends StatelessWidget {
   }
 }
 
-/**
+/*
  * widget :
  * 有状态的widget：在运行过程中有一些状态（data）需要改变
  * 无状态的widget：StatelessWidget 内容是确定没有状态（data）的改变
